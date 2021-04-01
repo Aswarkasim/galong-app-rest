@@ -45,7 +45,7 @@ class Auth extends REST_Controller
     $this->load->helper('string');
     $this->load->model('api/Api_model', 'API');
     $data = [
-      'id_user'     => $this->post('id_user'),
+      'id_user'     => random_string(),
       'username'    => $this->post('username'),
       'password'    => sha1($this->post('password')),
       'role'        => 'user'
