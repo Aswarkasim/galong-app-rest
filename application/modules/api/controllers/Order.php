@@ -22,10 +22,12 @@ class Order extends REST_Controller
     if ($id_user) {
       $this->db->where('id_user', $id_user);
       $this->db->where('is_done', '0');
-      $this->db->order_by('date_created', 'ASC');
+      $this->db->order_by('date_created', 'DESC');
       $order = $this->db->get('tbl_order')->result();
     } else {
       $this->db->where('id_driver', null);
+      $this->db->where('is_done', '0');
+      $this->db->order_by('date_created', 'DESC');
       $order = $this->db->get('tbl_order')->where('is_done', '0')->order_by('date_created', 'ASC')->result();
     }
 
