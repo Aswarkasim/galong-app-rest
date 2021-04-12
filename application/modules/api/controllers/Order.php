@@ -21,10 +21,10 @@ class Order extends REST_Controller
 
     if ($id_user) {
       $this->db->where('id_user', $id_user);
-      $order = $this->db->get('tbl_order')->result();
+      $order = $this->db->get('tbl_order')->where('is_done', '0')->order_by('date_created', 'ASC')->result();
     } else {
       $this->db->where('id_driver', null);
-      $order = $this->db->get('tbl_order')->result();
+      $order = $this->db->get('tbl_order')->where('is_done', '0')->order_by('date_created', 'ASC')->result();
     }
 
     $this->success_response('order', $order);
