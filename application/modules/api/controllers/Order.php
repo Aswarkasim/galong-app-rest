@@ -29,7 +29,7 @@ class Order extends REST_Controller
     } else if ($id_driver) {
       $order = $this->API->getOrderDriver($id_driver);
     } else {
-      $order = $this->API->getOrderDriver('NULL');
+      $order = $this->API->getOrderDriver();
     }
 
     $this->success_response('order', $order);
