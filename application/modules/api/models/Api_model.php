@@ -16,11 +16,12 @@ class Api_model extends CI_Model
 
   function getOrderDriver($id_driver = null)
   {
-    $this->db->select('tbl_order.*, tbl_user.namalengkap')
+    $this->db->select('tbl_order.*, tbl_user.namalengkap, tbl_user.nohp')
+      ->from('tbl_order')
       ->join('tbl_user', 'tbl_user.id_user = tbl_order.id_user', 'left')
       ->where('id_driver', $id_driver)
       ->where('is_done', '0')
-      ->order_by('tbl_order.date_created', 'ASC');
+      ->order_by('date_created', 'ASC');
     return $this->db->get()->result();
   }
 }
