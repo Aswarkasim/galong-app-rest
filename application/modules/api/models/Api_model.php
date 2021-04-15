@@ -20,7 +20,7 @@ class Api_model extends CI_Model
       ->join('tbl_user', 'tbl_user.id_user = tbl_order.id_user', 'left')
       ->where('id_driver', $id_driver)
       ->where('is_done', '0')
-      ->order_by('date_created', 'ASC');
+      ->order_by('tbl_order.date_created', 'ASC');
     return $this->db->get()->result();
   }
 }
