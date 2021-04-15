@@ -13,24 +13,23 @@ class Order extends REST_Controller
   public function __construct()
   {
     parent::__construct();
+    $this->load->model('api/Api_model', 'API');
   }
 
   public function index_get()
   {
     $id_user = $this->get('id_user');
+    $id_driver = $this->get('id_driver');
 
     if ($id_user) {
       $this->db->where('id_user', $id_user);
       $this->db->where('is_done', '0');
       $this->db->order_by('date_created', 'DESC');
       $order = $this->db->get('tbl_order')->result();
+    } else if ($id_driver) {
+      $order = $this->API->getOrderDriver($id_driver);
     } else {
-      $this->db->select('tbl_order.*, tbl_user.namalengkap');
-      $this->db->join('tbl_user', 'tbl_user.id_user = tbl_order.id_user', 'left');
-      $this->db->where('id_driver', null);
-      $this->db->where('is_done', '0');
-      $this->db->order_by('date_created', 'ASC');
-      $order = $this->db->get('tbl_order')->result();
+      $order = $this->API->getOrderDriver(null);
     }
 
     $this->success_response('order', $order);
