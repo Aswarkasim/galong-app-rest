@@ -25,6 +25,8 @@ class Order extends REST_Controller
       $this->db->order_by('date_created', 'DESC');
       $order = $this->db->get('tbl_order')->result();
     } else {
+      $this->db->select('tbl_order.*, tbl_user.namalengkap');
+      $this->db->join('tbl_user', 'tbl_user.id_user = tbl_order.id_user', 'left');
       $this->db->where('id_driver', null);
       $this->db->where('is_done', '0');
       $this->db->order_by('date_created', 'ASC');
